@@ -48,3 +48,4 @@ async function loadUsers() {
     responseDiv.textContent = `Klaida: ${error.message}`;
   }
 }
+loadUsers();
