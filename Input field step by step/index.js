@@ -13,3 +13,20 @@ document
       return;
     }
   });
+
+try {
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ Name: name }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Klaida siunčiant duomenis į API.");
+  }
+
+  const result = await response.json();
+  responseDiv.textContent = `Vartotojas pridėtas: ID ${result.id}, vardas: ${result.Name}`;
+} catch (error) {
+  responseDiv.textContent = `Klaida: ${error.message}`;
+}
