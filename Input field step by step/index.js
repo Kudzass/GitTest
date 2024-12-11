@@ -30,3 +30,21 @@ try {
 } catch (error) {
   responseDiv.textContent = `Klaida: ${error.message}`;
 }
+
+async function loadUsers() {
+  const responseDiv = document.getElementById("response");
+
+  try {
+    const response = await fetch(apiUrl, { method: "GET" });
+    if (!response.ok) {
+      throw new Error("Klaida gaunant vartotojus.");
+    }
+
+    const users = await response.json();
+    responseDiv.innerHTML = `<ul>${users.data
+      .map((user) => `<li>ID: ${user.id}, Vardas: ${user.Name}</li>`)
+      .join("")}</ul>`;
+  } catch (error) {
+    responseDiv.textContent = `Klaida: ${error.message}`;
+  }
+}
